@@ -13,10 +13,11 @@
     </parent>
 
     <modules>
-        <module>service</module>
+        <module>service1</module>
         <module>core</module>
         <module>auth</module>
         <module>service2</module>
+        <module>eurekacenter</module>
     </modules>
 
 	<groupId>cn.programer.zyf</groupId>

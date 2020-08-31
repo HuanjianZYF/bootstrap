@@ -18,7 +18,7 @@ public class ConsumeController {
 
     @GetMapping(value = "/hello")
     public String hello() {
-        return restTemplate.getForEntity("http://test-service/test", String.class).getBody();
+        return restTemplate.getForEntity("http://service1/test2", String.class).getBody();
     }
 
     @GetMapping(value = "/hello2")
