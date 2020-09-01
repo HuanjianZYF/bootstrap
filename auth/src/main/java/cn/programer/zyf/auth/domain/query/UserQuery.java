@@ -1,4 +1,4 @@
-package cn.programer.zyf.auth.domain;
+package cn.programer.zyf.auth.domain.query;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

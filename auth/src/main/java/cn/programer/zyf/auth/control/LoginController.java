@@ -21,6 +21,7 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         subject.login(token);
 
+        System.out.println("---验证权限" + subject.isPermitted("cccc"));
         return "haha";
     }
 }

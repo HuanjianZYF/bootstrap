@@ -1,6 +1,6 @@
 package cn.programer.zyf.auth.dao;
 
-import cn.programer.zyf.auth.domain.UserQuery;
+import cn.programer.zyf.auth.domain.query.UserQuery;
 import cn.programer.zyf.auth.domain.entity.UserDO;
 import org.mapstruct.Mapper;
 

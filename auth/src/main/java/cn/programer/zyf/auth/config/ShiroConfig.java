@@ -1,8 +1,11 @@
 package cn.programer.zyf.auth.config;
 
+import cn.programer.zyf.auth.common.ShiroPermissionResolver;
+import cn.programer.zyf.auth.common.ShiroRealm;
+import cn.programer.zyf.auth.common.ShiroRolePermissionResolver;
+import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,11 +19,8 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    @Autowired
-    private ShiroRealm shiroRealm;
-
     @Bean
-    public ShiroFilterFactoryBean shirFilter(org.apache.shiro.mgt.SecurityManager securityManager) {
+    public ShiroFilterFactoryBean shiroFilter(org.apache.shiro.mgt.SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
@@ -38,11 +38,38 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
-    @Bean
+    @Bean(name = "shiroRealm")
+    public ShiroRealm shiroRealm() {
+        ShiroRealm shiroRealm = new ShiroRealm();
+        shiroRealm.setCredentialsMatcher(simpleCredentialsMatcher());
+
+        // 权限
+        shiroRealm.setRolePermissionResolver(rolePermissionResolver());
+        shiroRealm.setPermissionResolver(permissionResolver());
+
+        return shiroRealm;
+    }
+
+    @Bean(name="simpleCredentialsMatcher")
+    public SimpleCredentialsMatcher simpleCredentialsMatcher(){
+        SimpleCredentialsMatcher simpleCredentialsMatcher = new SimpleCredentialsMatcher();
+        return simpleCredentialsMatcher;
+    }
+
+    @Bean(name = "securityManager")
     public org.apache.shiro.mgt.SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(shiroRealm);
+        securityManager.setRealm(shiroRealm());
         return securityManager;
     }
 
+    @Bean(name = "permissionResolver")
+    public ShiroPermissionResolver permissionResolver() {
+        return new ShiroPermissionResolver();
+    }
+
+    @Bean(name = "rolePermissionResolver")
+    public ShiroRolePermissionResolver rolePermissionResolver() {
+        return new ShiroRolePermissionResolver();
+    }
 }

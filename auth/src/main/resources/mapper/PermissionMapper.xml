@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.programer.zyf.auth.dao.PermissionMapper">
+
+    <select id="listRolePermission" resultType="cn.programer.zyf.auth.domain.entity.PermissionDO">
+        select
+            b.code, b.`name`, b.`desc`
+        from role_permission a
+        left join permission b
+        on (a.permission_id = b.id)
+        where b.status = 1
+        and a.role_code = #{roleCode}
+    </select>
+</mapper>

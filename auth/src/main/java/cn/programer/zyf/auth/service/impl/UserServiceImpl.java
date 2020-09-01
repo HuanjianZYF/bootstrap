@@ -1,7 +1,7 @@
 package cn.programer.zyf.auth.service.impl;
 
 import cn.programer.zyf.auth.dao.UserMapper;
-import cn.programer.zyf.auth.domain.UserQuery;
+import cn.programer.zyf.auth.domain.query.UserQuery;
 import cn.programer.zyf.auth.domain.entity.UserDO;
 import cn.programer.zyf.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
